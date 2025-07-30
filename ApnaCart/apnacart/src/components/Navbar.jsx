@@ -32,12 +32,12 @@ const Navbar = () => {
 
                 <div onClick={()=> navigate("/cart")} className="relative cursor-pointer">
                     <img src={assets.nav_cart_icon} alt='cart' className='w-6 opacity-80'/>
-                    <button className="absolute -top-2 -right-3 text-xs text-white bg-green-300 w-[18px] h-[18px] rounded-full">3</button>
+                    <button className="absolute -top-2 -right-3 text-xs text-white bg-emerald-400 w-[18px] h-[18px] rounded-full">3</button>
                 </div>
 
                 {!user ? (<button onClick={() =>{
                     setshowUserLogin(true)
-                }} className="cursor-pointer px-8 py-2 bg-green-400 hover:bg-green-300 transition text-white rounded-full">
+                }} className="cursor-pointer px-8 py-2 bg-emerald-500 hover:bg-emerald-600 transition text-white rounded-full">
                     Login
                 </button>)
                 :
@@ -73,7 +73,7 @@ const Navbar = () => {
                     setshowUserLogin(true)
                 }}className="cursor-pointer px-6 py-2 mt-2 bg-green-400 hover:bg-green-300 transition text-white rounded-full text-sm">
                     Login
-                </button>) : (<button onClick={logout} className="cursor-pointer px-6 py-2 mt-2 bg-green-400 hover:bg-green-300 transition text-white rounded-full text-sm">
+                </button>) : (<button onClick={logout} className="cursor-pointer px-6 py-2 mt-2 bg-emerald-500 hover:bg-emerald-600 transition text-white rounded-full text-sm">
                     Logout
                 </button>)}
                 
