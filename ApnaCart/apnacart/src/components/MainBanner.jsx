@@ -14,7 +14,7 @@ const MainBanner = () => {
         
 
         <div className='flex items-center mt-6 font-medium'>
-          <Link to={'/products'} className='group flex items-center gap-2 px-7 md:px-9 py-3 bg-emerald-500 hover:bg-emerald-300 transition rounded text-white cursor-pointer'>Shop now
+          <Link to={'/products'} className='group flex items-center gap-2 px-7 md:px-9 py-3 bg-emerald-500 hover:bg-emerald-600 transition rounded text-white cursor-pointer'>Shop now
           <img className='md:hidden transition group-focus:translate-x-1' src={assets.white_arrow_icon} alt='arrow'/>
           </Link>
 
