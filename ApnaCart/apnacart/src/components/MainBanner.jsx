@@ -22,8 +22,6 @@ const MainBanner = () => {
           <img className='transition group-hover:translate-x-1' src={assets.black_arrow_icon} alt='arrow'/>
           </Link>
 
-
-
         </div>
         </div>
 
