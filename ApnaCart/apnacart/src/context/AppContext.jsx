@@ -22,9 +22,13 @@ export const AppContextProvider = ({children})=>{
         setProducts(dummyProducts)
     }
 
+    useEffect(()=>{
+        fetchProducts()
+    },[])
+
     // Add Product to Cart
 
-    const addToCart = ()=>{
+    const addToCart = (itemId)=>{
         let cartData = structuredClone(cartItems);
 
         if(cartData[itemId]){
@@ -49,7 +53,7 @@ export const AppContextProvider = ({children})=>{
 
     // Remove Product from Cart
 
-    const removeFromCart = ()=>{
+    const removeFromCart = (itemId)=>{
         let cartData = structuredClone(cartItems);
         if(cartData[itemId]){
             cartData[itemId] -= 1;
@@ -61,12 +65,9 @@ export const AppContextProvider = ({children})=>{
         setCartItems(cartData)
     }
 
+    
 
-    useEffect(()=>{
-        fetchProducts()
-    },[])
-
-    const value = {user, setUser, isSeller, setIsSeller, navigate, showUserLogin, setshowUserLogin, products, currency, addToCart, updateCartItem, removeFromCart}
+    const value = {user, setUser, isSeller, setIsSeller, navigate, showUserLogin, setshowUserLogin, products, currency, addToCart, updateCartItem, removeFromCart, cartItems, fetchProducts}
 
 
     return <AppContext.Provider value={value}>
