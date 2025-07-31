@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 
 const Navbar = () => {
     const [open, setOpen] = useState(false)
-    const {user, setUser, setshowUserLogin, navigate, searchQuery, setSearchQuery} = useAppContext();
+    const {user, setUser, setshowUserLogin, navigate, searchQuery, setSearchQuery, getCartCount} = useAppContext();
 
     const logout = async ()=>{
         setUser(null);
@@ -40,7 +40,7 @@ const Navbar = () => {
 
                 <div onClick={()=> navigate("/cart")} className="relative cursor-pointer">
                     <img src={assets.nav_cart_icon} alt='cart' className='w-6 opacity-80'/>
-                    <button className="absolute -top-2 -right-3 text-xs text-white bg-emerald-400 w-[18px] h-[18px] rounded-full">3</button>
+                    <button className="absolute -top-2 -right-3 text-xs text-white bg-emerald-400 w-[18px] h-[18px] rounded-full">{getCartCount()}</button>
                 </div>
 
                 {!user ? (<button onClick={() =>{
@@ -61,10 +61,18 @@ const Navbar = () => {
                 )}
             </div>
 
-            <button onClick={() => open ? setOpen(false) : setOpen(true)} aria-label="Menu" className="sm:hidden">
+            <div className='flex items-center gap-6 sm:hidden'>
+                <div onClick={()=> navigate("/cart")} className="relative cursor-pointer">
+                    <img src={assets.nav_cart_icon} alt='cart' className='w-6 opacity-80'/>
+                    <button className="absolute -top-2 -right-3 text-xs text-white bg-emerald-400 w-[18px] h-[18px] rounded-full">{getCartCount()}</button>
+                </div>
+                <button onClick={() => open ? setOpen(false) : setOpen(true)} aria-label="Menu" className="">
                 {/* Menu Icon SVG */}
                 <img src={assets.menu_icon} alt='menu'/>
             </button>
+            </div>
+
+            
 
             {/* Mobile Menu */}
            { open &&
