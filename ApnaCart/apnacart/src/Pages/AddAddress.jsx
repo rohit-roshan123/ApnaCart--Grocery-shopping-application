@@ -52,12 +52,42 @@ const AddAddress = () => {
     <div className='flex flex-col-reverse md:flex-row justify-between mt-10'>
         <div className='flex-1 max-w-md'>
             <form onSubmit={onSubmitHandler} className='space-y-3 mt-6 text-sum'>
-                <div>
+                <div className='grid grid-cols-2 gap-4'>
                     <Inputfield handleChange={handleChange} name="firstName" placeholder="firstname"
                     address={address} type='text' />
                     <Inputfield handleChange={handleChange} name="lastName" placeholder="lastname"
                     address={address} type='text' />
                 </div>
+
+                <Inputfield handleChange={handleChange} name="email" placeholder="email address"
+                    address={address} type='email' />
+
+                <Inputfield handleChange={handleChange} name="street" placeholder="street"
+                    address={address} type='text' />
+
+                <div className='grid grid-cols-2 gap-4'>
+
+                    <Inputfield handleChange={handleChange} name="city" placeholder="city"
+                    address={address} type='text' />
+                    <Inputfield handleChange={handleChange} name="state" placeholder="state"
+                    address={address} type='text' />
+
+                </div>
+
+                <div className='grid grid-cols-2 gap-4'>
+
+                    <Inputfield handleChange={handleChange} name="zipcode" placeholder="zip code"
+                    address={address} type='number' />
+                    <Inputfield handleChange={handleChange} name="country" placeholder="country"
+                    address={address} type='text' />
+
+                </div>
+
+                <Inputfield handleChange={handleChange} name="phone" placeholder="phone"
+                    address={address} type='text' />
+
+                <button className='w-full mt-6 bg-emerald-500 text-white py-3 hover:bg-emerald-700 transition cursor-pointer uppercase'>Save address</button>
+
 
 
             </form>
