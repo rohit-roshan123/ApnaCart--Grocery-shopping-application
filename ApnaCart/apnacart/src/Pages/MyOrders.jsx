@@ -51,9 +51,6 @@ const MyOrders = () => {
                             Amount: ${item.product.offerPrice*item.quantity}
                         </p>
 
-
-
-
                     </div>
 
 

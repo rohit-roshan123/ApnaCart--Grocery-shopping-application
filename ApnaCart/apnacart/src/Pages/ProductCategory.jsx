@@ -43,9 +43,6 @@ const ProductCategory = () => {
 
         )}
 
-
-
-
     </div>
   )
 }
