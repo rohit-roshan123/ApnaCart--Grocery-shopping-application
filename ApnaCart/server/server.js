@@ -1,7 +1,8 @@
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import cors from 'cors';
-
+import connectdb from './configuration/db.js';
+import 'dotenv/config'
 
 const app = express();
 
@@ -23,7 +24,10 @@ app.get('/', (req,res)=>{
 
 });
 
-app.listen(port, ()=>{
+app.listen(port, async ()=>{
+
+    await connectdb()
+    
     console.log(`server is running on port ${port}`)
 })
 
