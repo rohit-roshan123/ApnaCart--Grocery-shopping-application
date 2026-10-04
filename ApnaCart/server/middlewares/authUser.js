@@ -1,0 +1,34 @@
+
+import jwt from "jsonwebtoken";
+
+
+const authUser = (req,res,next)=>{
+
+    const { token } = req.cookies;
+
+    if(!token){
+        return res.json({success: false, message: 'not authorized'});     
+    }
+
+    try{
+
+        const tokenDecode = jwt.verify(token,"anytext");
+
+        if(tokenDecode.id){
+            req.body.userId = tokenDecode.id;
+        }
+        else{
+            return res.json({success: false, message: 'not authorized'});
+        }
+
+        next();
+
+    }
+    catch(error){
+
+        res.json({success:false, message:error.message })
+        
+    }
+}
+
+export default authUser;
