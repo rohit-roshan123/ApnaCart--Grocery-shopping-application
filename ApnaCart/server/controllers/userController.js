@@ -89,3 +89,44 @@ export const login = async (req, res)=>{
 
 
 }
+
+
+
+export const isAuth = async(req,res)=>{
+
+    try{
+        const { userId } = req;
+        const user = await User.findById(userId).select("-password")
+        return res.json({success:true, user})
+
+    }
+    catch(error){
+        res.json({success:false, message:error.message});
+    }
+}
+
+export const logout = async (req , res)=>{
+
+    try{
+
+        res.clearCookie('token',{
+            httpOnly:true,
+            secure:false,
+            sameSite:'strict'
+        }
+        )
+        res.json({success: true, message: "logged Out"})
+
+
+    }
+    catch(error){
+
+        console.log("here");
+        res.json({success:false, message:error.message});
+
+    }
+
+
+
+
+}
