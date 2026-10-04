@@ -2,7 +2,8 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import cors from 'cors';
 import connectdb from './configuration/db.js';
-import 'dotenv/config'
+import 'dotenv/config';
+import userRouter from './routes/userRoute.js';
 
 const app = express();
 
@@ -23,6 +24,9 @@ app.get('/', (req,res)=>{
     res.send("api is working")
 
 });
+
+app.use('/api/user', userRouter);
+
 
 app.listen(port, async ()=>{
 
