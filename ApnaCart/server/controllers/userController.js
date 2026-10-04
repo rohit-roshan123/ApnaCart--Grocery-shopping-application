@@ -1,13 +1,8 @@
-
-
-// register user
-
 import User from "../models/User.js";
-
 import bcrypt from "bcryptjs";
-
 import jwt from "jsonwebtoken";
 
+// register user
 export const register = async (req,res) => {
     try{
 
@@ -44,5 +39,53 @@ export const register = async (req,res) => {
         res.json({success: false, message: error.message});
 
     }
+
+}
+
+
+// login user
+
+export const login = async (req, res)=>{
+
+    try{
+
+        const { email, password } = req.body;
+
+        if(!email || !password){
+            return res.json({success: false, message: "Both email and password are required"})
+        }
+
+        const user = await User.findOne({email});
+
+        if(!user){
+            return res.json({success: false, message: "invalid email or password"})
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if(!isMatch){
+            return res.json({success: false, message: "invalid password"})
+        }
+
+
+        const token = jwt.sign({id: user._id}, "anytext", {expiresIn: '7d'});
+
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: true,    // env variable
+            sameSite: 'strict',   // env variable
+            maxAge: 7*24*60*60*1000
+        })
+
+        return res.json({success: true, user:{email: user.email, name: user.name}})
+
+    }
+    catch(error){
+
+        res.json({success: false, message: error.message});
+
+    }
+
+
 
 }
