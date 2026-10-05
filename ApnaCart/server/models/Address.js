@@ -4,8 +4,9 @@ import mongoose from "mongoose";
 const addressSchema = new mongoose.Schema({
 
     userId:{
-        type: String,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'user'
     },
     firstName:{
         type: String,
