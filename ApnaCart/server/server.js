@@ -4,6 +4,7 @@ import cors from 'cors';
 import connectdb from './configuration/db.js';
 import 'dotenv/config';
 import userRouter from './routes/userRoute.js';
+import sellerRouter from './routes/sellerRoute.js';
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.get('/', (req,res)=>{
 });
 
 app.use('/api/user', userRouter);
+app.use('/api/seller', sellerRouter);
 
 
 app.listen(port, async ()=>{
