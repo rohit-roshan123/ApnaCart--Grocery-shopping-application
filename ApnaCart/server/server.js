@@ -5,10 +5,13 @@ import connectdb from './configuration/db.js';
 import 'dotenv/config';
 import userRouter from './routes/userRoute.js';
 import sellerRouter from './routes/sellerRoute.js';
+import connectCloudinary from './configuration/cloudinary.js';
 
 const app = express();
 
 const port = process.env.PORT || 4000;
+
+await connectCloudinary();
 
 
 // urls of applications to communicate with backend
