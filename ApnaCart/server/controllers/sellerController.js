@@ -33,13 +33,36 @@ catch(error){
     res.json({success:false, message:error.message});
 }
 
-    
-
-    
+}
 
 
+export const isSellerAuth = async(req,res)=>{
+
+    try{
+        
+        return res.json({success:true})
+    }
+    catch(error){
+        res.json({success:false, message:error.message});
+    }
+}
 
 
+export const sellerLogout = async (req , res)=>{
 
+    try{
 
+        res.clearCookie('sellertoken',{
+            httpOnly:true,
+            secure:false,
+            sameSite:'strict'
+        }
+        )
+        res.json({success: true, message: "logged Out"})
+    }
+    catch(error){
+
+        res.json({success:false, message:error.message});
+
+    }
 }
