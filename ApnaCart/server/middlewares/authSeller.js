@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 
-const authSeller = async ()=>{
+const authSeller = async (req,res,next)=>{
 
     const { sellertoken } = req.cookies;
     

@@ -21,6 +21,27 @@ export const AppContextProvider = ({children})=>{
 
     const [cartItems, setCartItems] = useState({})
     const [searchQuery, setSearchQuery] = useState({})
+
+    const fetchSeller = async()=>{
+        try{
+            const {data} = await axios.get('/api/seller/is-auth');
+            if(data.success){
+                console.log("in try is true")
+                setIsSeller(true)
+            }
+            else{
+                console.log("in try is false")
+                setIsSeller(false)
+            }
+        }
+        catch(error){
+            console.log("in catch is false")
+            setIsSeller(false)
+        }
+
+    }
+
+
     
     // Fetch All Products
     const fetchProducts = async ()=>{
@@ -28,7 +49,8 @@ export const AppContextProvider = ({children})=>{
     }
 
     useEffect(()=>{
-        fetchProducts()
+        fetchSeller();
+        fetchProducts();
     },[])
 
     // Add Product to Cart
