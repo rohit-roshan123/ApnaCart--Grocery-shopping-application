@@ -51,8 +51,7 @@ export const isSellerAuth = async(req,res)=>{
 export const sellerLogout = async (req , res)=>{
 
     try{
-
-        res.clearCookie('sellertoken',{
+      res.clearCookie('sellertoken',{
             httpOnly:true,
             secure:false,
             sameSite:'strict'
@@ -61,6 +60,8 @@ export const sellerLogout = async (req , res)=>{
         res.json({success: true, message: "logged Out"})
     }
     catch(error){
+
+        console.log("hi");
 
         res.json({success:false, message:error.message});
 
