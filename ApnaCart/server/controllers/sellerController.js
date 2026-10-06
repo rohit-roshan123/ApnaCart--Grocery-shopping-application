@@ -23,7 +23,7 @@ export const sellerLogin = async(req,res)=>{
     }
     else{
 
-        return res.josn({success: false, message: "invalid credentials"});
+        return res.json({success: false, message: "invalid credentials"});
 
     }
 
