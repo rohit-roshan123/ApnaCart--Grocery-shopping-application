@@ -40,9 +40,7 @@ export const AppContextProvider = ({children})=>{
         }
 
     }
-
-
-    
+   
     // Fetch All Products
     const fetchProducts = async ()=>{
         setProducts(dummyProducts)
@@ -121,7 +119,6 @@ export const AppContextProvider = ({children})=>{
     return <AppContext.Provider value={value}>
 
         {children}
-
 
     </AppContext.Provider>
 }

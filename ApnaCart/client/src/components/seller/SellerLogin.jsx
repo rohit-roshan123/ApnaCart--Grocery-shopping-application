@@ -28,6 +28,10 @@ const SellerLogin = () => {
   }
 
   useEffect(()=>{
+    console.log("isSeller changed:", isSeller);
+  },[isSeller])
+
+  useEffect(()=>{
     if(isSeller){
       navigate("/seller")
     }

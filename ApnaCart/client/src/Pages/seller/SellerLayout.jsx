@@ -32,8 +32,6 @@ const SellerLayout = () => {
             toast.error(error.message)
 
         }
-
-
     }
 
     return (
