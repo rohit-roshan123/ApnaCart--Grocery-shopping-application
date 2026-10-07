@@ -12,7 +12,7 @@ const authUser = (req,res,next)=>{
 
     try{
 
-        const tokenDecode = jwt.verify(token,"anytext");
+        const tokenDecode = jwt.verify(token,process.env.jwt_secret);
 
         if(tokenDecode.id){
             req.userId = tokenDecode.id;

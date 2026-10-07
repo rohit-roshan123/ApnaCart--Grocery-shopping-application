@@ -23,12 +23,12 @@ export const register = async (req,res) => {
 
         const user = await User.create({name, email, password: hashedpassword});
 
-        const token = jwt.sign({id: user._id}, "anytext", {expiresIn: '7d'});
+        const token = jwt.sign({id: user._id}, process.env.jwt_secret, {expiresIn: '7d'});
 
         res.cookie('token', token, {
             httpOnly: true,
-            secure: true,    // env variable
-            sameSite: 'strict',   // env variable
+            secure: process.env.node_env === "production"?true:false,    // env variable
+            sameSite: process.env.node_env === "production"? 'none':'strict',   // env variable
             maxAge: 7*24*60*60*1000
         })
 
@@ -68,12 +68,12 @@ export const login = async (req, res)=>{
         }
 
 
-        const token = jwt.sign({id: user._id}, "anytext", {expiresIn: '7d'});
+        const token = jwt.sign({id: user._id}, process.env.jwt_secret, {expiresIn: '7d'});
 
         res.cookie('token', token, {
             httpOnly: true,
-            secure: true,    // env variable
-            sameSite: 'strict',   // env variable
+            secure: process.env.node_env === "production"?true:false,    // env variable
+            sameSite: process.env.node_env === "production"? 'none':'strict',   // env variable
             maxAge: 7*24*60*60*1000
         })
 
@@ -108,8 +108,8 @@ export const logout = async (req , res)=>{
 
         res.clearCookie('token',{
             httpOnly:true,
-            secure:false,
-            sameSite:'strict'
+            secure:process.env.node_env === "production"?true:false,
+            sameSite:process.env.node_env === "production"? 'none':'strict'
         }
         )
         res.json({success: true, message: "logged Out"})

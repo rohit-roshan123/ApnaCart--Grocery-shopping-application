@@ -3,9 +3,9 @@ import {v2 as cloudinary} from 'cloudinary';
 
 const connectCloudinary = async ()=>{
     cloudinary.config({
-        cloud_name: 'eb8fetxr',
-        api_key: '923329142544387',
-        api_secret: 'iJuZu_dnqYNHSGSJhS92iITTMxw'
+        cloud_name: process.env.cloudinary_cloud_name,
+        api_key: process.env.cloudinary_api_key,
+        api_secret: process.env.cloudinary_api_secret
 
     })
 

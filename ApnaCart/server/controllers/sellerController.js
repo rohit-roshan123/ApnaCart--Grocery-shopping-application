@@ -7,14 +7,14 @@ export const sellerLogin = async(req,res)=>{
     try{
     const {email, password} = req.body;
 
-    if(password === "apnacart123" && email=== "apnacart@gmail.com"){
-        const token = jwt.sign({email}, "anytext", {expiresIn: '7d'});
+    if(password === process.env.seller_password && email=== process.env.seller_email){
+        const token = jwt.sign({email}, process.env.jwt_secret, {expiresIn: '7d'});
     
 
     res.cookie('sellertoken', token, {
             httpOnly: true,
-            secure: false,    // env variable
-            sameSite: 'strict',   // env variable
+            secure: process.env.node_env === "production"?true:false,    // env variable
+            sameSite: process.env.node_env === "production"? 'none':'strict',   // env variable
             maxAge: 7*24*60*60*1000
         });
 
@@ -53,8 +53,8 @@ export const sellerLogout = async (req , res)=>{
     try{
       res.clearCookie('sellertoken',{
             httpOnly:true,
-            secure:false,
-            sameSite:'strict'
+            secure:process.env.node_env === "production"?true:false,
+            sameSite:process.env.node_env === "production"? 'none':'strict'
         }
         )
         res.json({success: true, message: "logged Out"})

@@ -11,9 +11,9 @@ const authSeller = async (req,res,next)=>{
     
         try{
     
-            const tokenDecode = jwt.verify(sellertoken,"anytext");
+            const tokenDecode = jwt.verify(sellertoken, process.env.jwt_secret);
     
-            if(tokenDecode.email === "apnacart@gmail.com"){
+            if(tokenDecode.email === process.env.seller_email){
                 
                 next();
             }

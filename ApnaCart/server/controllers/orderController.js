@@ -1,5 +1,6 @@
 import Order from "../models/Order.js";
 import Product from "../models/Product.js";
+import Stripe from "stripe";
 
 
 export const placeOrderCOD = async (req,res)=>{
@@ -76,7 +77,7 @@ export const placeOrderStripe = async (req,res)=>{
 
         // stripe gateway initialize
 
-        const stripeInstance = new stripe(process.env.stripe_secret_key);
+        const stripeInstance = new Stripe(process.env.stripe_secret_key);
 
         const line_items = products.map((item)=>{
 
