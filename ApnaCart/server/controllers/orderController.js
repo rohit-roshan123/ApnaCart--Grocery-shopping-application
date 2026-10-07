@@ -13,7 +13,7 @@ export const placeOrderCOD = async (req,res)=>{
         }
 
         let amount  = await items.reduce(async (acc, item)=>{
-            const product = await Product.find(item.product);
+            const product = await Product.findById(item.product);
             return (await acc) + product.offerPrice* item.quantity;
 
         }, 0)
