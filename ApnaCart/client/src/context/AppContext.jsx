@@ -84,6 +84,29 @@ export const AppContextProvider = ({children})=>{
         console.log(user);
     },[user])
 
+    // update cart items in database
+    useEffect(()=>{
+
+        const updateCart = async()=>{
+
+            try{
+                const {data} = await axios.post('/api/cart/update', {cartItems});
+
+                if(!data.success){
+                    toast.error(data.message)
+                }
+            }
+            catch(error){
+                toast.error(error.message)
+            }
+        }
+
+        if(user){
+            updateCart();
+        }
+
+    }, [cartItems])
+
     // Add Product to Cart
 
     const addToCart = (itemId)=>{

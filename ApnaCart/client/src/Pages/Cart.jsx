@@ -3,11 +3,11 @@ import { useAppContext } from "../context/AppContext"
 import { assets, dummyAddress } from "../assets/assets";
 const Cart = () => {
     
-    const {products, currency, cartItems, removeFromCart, getCartCount, updateCartCount, navigate, getCartAmount, updateCartItem} = useAppContext();
+    const {products, currency, cartItems, removeFromCart, getCartCount, updateCartCount, navigate, getCartAmount, updateCartItem, axios, user } = useAppContext();
     const [cartArray, setCartArray] = useState([])
-    const [addresses, setAddresses] = useState(dummyAddress)
+    const [addresses, setAddresses] = useState([])
     const [showAddress, setShowAddress] = useState(false)
-    const [selectedAddress, setselectedAddress] = useState(dummyAddress[0])
+    const [selectedAddress, setselectedAddress] = useState(null)
     const [paymentOption, setPaymentOption] = useState("COD")
 
     const getCart=()=>{
@@ -19,6 +19,34 @@ const Cart = () => {
         }
         setCartArray(tempArray)
     }
+
+    const getUserAddresses = async()=>{
+
+        try{
+            const {data} = await axios.get('/api/address/get');
+            if(data.success){
+                setAddresses(data.addresses)
+
+                if(data.addresses.length>0){
+
+                    setselectedAddress(data.addresses[0]);
+
+                }
+            }
+            else{
+                toast.error(data.message);
+            }
+        }
+        catch(error){
+            toast.error(error.message);
+        }
+    }
+
+    useEffect(()=>{
+        if(user){
+            getUserAddresses();
+        }
+    },[user])
 
     useEffect(()=>{
         if(products.length > 0 && cartItems){
@@ -98,7 +126,7 @@ const Cart = () => {
                         </button>
                         {showAddress && (
                             <div className="absolute top-12 py-1 bg-white border border-gray-300 text-sm w-full">
-                                {addresses.map((address,index)=>(<p onClick={() => {
+                                {addresses.map((address,index)=>(<p key={index} onClick={() => {
                                     setselectedAddress(address);
                                     setShowAddress(false)}} className="text-gray-500 p-2 hover:bg-gray-100">
                                     {address.street}, {address.city}, {address.state}, {address.country}
@@ -135,7 +163,7 @@ const Cart = () => {
                     </p>
                 </div>
 
-                <button onClick={placeOrder()} className="w-full py-3 mt-6 cursor-pointer bg-emerald-500 text-white font-medium hover:bg-emerald-600 transition">
+                <button onClick={()=> placeOrder()} className="w-full py-3 mt-6 cursor-pointer bg-emerald-500 text-white font-medium hover:bg-emerald-600 transition">
                     {paymentOption === "COD" ? "Place Order" : "Proceed to Checkout"}
                 </button>
             </div>
