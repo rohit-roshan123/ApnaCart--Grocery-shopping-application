@@ -26,17 +26,30 @@ export const AppContextProvider = ({children})=>{
         try{
             const {data} = await axios.get('/api/seller/is-auth');
             if(data.success){
-                console.log("in try is true")
+                
                 setIsSeller(true)
             }
             else{
-                console.log("in try is false")
+                
                 setIsSeller(false)
             }
         }
         catch(error){
-            console.log("in catch is false")
             setIsSeller(false)
+        }
+
+    }
+
+    const fetchUser = async ()=>{
+        try{
+            const {data} = await axios.get('/api/user/is-auth');
+            if(data.success){
+                setUser(data.user)
+                setCartItems(data.user.cartItems);
+            }
+        }
+        catch(error){
+            setUser(null);
         }
 
     }
@@ -62,9 +75,14 @@ export const AppContextProvider = ({children})=>{
     }
 
     useEffect(()=>{
+        fetchUser();
         fetchSeller();
         fetchProducts();
     },[])
+
+    useEffect(()=>{
+        console.log(user);
+    },[user])
 
     // Add Product to Cart
 
