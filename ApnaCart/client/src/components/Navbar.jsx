@@ -7,7 +7,7 @@ import toast from 'react-hot-toast'
 
 const Navbar = () => {
     const [open, setOpen] = useState(false)
-    const {user, setUser, setshowUserLogin, navigate, searchQuery, setSearchQuery, getCartCount, axios } = useAppContext();
+    const {user, setUser, setshowUserLogin, navigate, searchQuery, setSearchQuery, getCartCount, axios, setCartItems } = useAppContext();
 
     const logout = async ()=>{
 
@@ -16,6 +16,7 @@ const Navbar = () => {
 
             if(data.success){
                 toast.success(data.message)
+                setCartItems({});
                 setUser(null);
                 navigate('/')
             }
