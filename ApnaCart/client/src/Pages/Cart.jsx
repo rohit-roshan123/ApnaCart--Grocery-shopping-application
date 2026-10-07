@@ -56,6 +56,18 @@ const Cart = () => {
         }
     },[products,cartItems])
 
+    useEffect(()=>{
+
+        console.log(selectedAddress);
+
+    },[selectedAddress])
+
+    useEffect(()=>{
+
+        console.log(cartArray);
+
+    },[cartArray])
+
     const placeOrder = async ()=>{
 
         try{
